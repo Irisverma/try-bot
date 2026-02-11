@@ -15,14 +15,16 @@ import io
 from flask import Flask
 from threading import Thread
 
+# This is the heartbeat server
 app = Flask('')
 
 @app.route('/')
 def home():
-    return "RAGE GOD IS ALIVE"
+    return "Bot is running!"
 
 def run():
-  app.run(host='0.0.0.0', port=8080)
+    # Koyeb uses port 8080 by default
+    app.run(host='0.0.0.0', port=8080)
 
 def keep_alive():
     t = Thread(target=run)
@@ -1091,14 +1093,6 @@ async def run_all_bots():
     
     # Keep running
     await asyncio.Event().wait()
-
-if __name__ == "__main__":
-    try:
-        asyncio.run(run_all_bots())
-    except KeyboardInterrupt:
-        print("\n🛑 RAGE GOD Shutting Down...")
-    except Exception as e:
-        print(f"❌ Error: {e}")
 if __name__ == '__main__':
     # 1. Start the web server so Koyeb doesn't kill us
     keep_alive() 
